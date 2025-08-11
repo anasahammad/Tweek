@@ -6,6 +6,7 @@ import {clerkMiddleware} from "@clerk/express"
 import userRoutes from "./routes/user.route.js"
 import postsRoutes from "./routes/post.route.js"
 import commentRoutes from "./routes/comment.route.js"
+import notificationsRoutes from "./routes/notification.route.js"
 
 
 const app = express()
@@ -21,6 +22,7 @@ app.get("/", (req, res) => res.send("Hello from database"))
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postsRoutes)
 app.use("/api/comments", commentRoutes)
+app.use("/api/notifications", notificationsRoutes)
 
 // error handling middleWare
 
