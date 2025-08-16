@@ -29,7 +29,7 @@ app.use("/api/notifications", notificationsRoutes)
 
 app.get("/", (req, res) => res.send("Hello from database"))
 
-app.use((err, req, next)=>{
+app.use((err, req, res, next)=>{
     console.log("Unhandled error:", err)
     res.status(500).json({error: err.message || "Internal server error"})
 })
