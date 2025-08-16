@@ -18,7 +18,7 @@ app.use(clerkMiddleware())
 app.use(arcjetMiddleware)
 
 
-app.get("/", (req, res) => res.send("Hello from database"))
+
 
 app.use("/api/users", userRoutes)
 app.use("/api/posts", postsRoutes)
@@ -26,6 +26,8 @@ app.use("/api/comments", commentRoutes)
 app.use("/api/notifications", notificationsRoutes)
 
 // error handling middleWare
+
+app.get("/", (req, res) => res.send("Hello from database"))
 
 app.use((err, req, next)=>{
     console.log("Unhandled error:", err)
