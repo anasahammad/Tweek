@@ -52,6 +52,10 @@ export const syncUser = asyncHandler(async(req, res)=>{
     profilePicture: clerkUser.imageUrl || "",
   };
 
+  if (!userData.userName) {
+  return res.status(400).json({ error: "userName is required" });
+}
+
   const user = await User.create(userData);
 
   res.status(201).json({ user, message: "User created successfully" });
