@@ -30,6 +30,7 @@ export const updateProfile = asyncHandler(async(req, res)=>{
 })
 
 export const syncUser = asyncHandler(async(req, res)=>{
+  console.log("Syncing user...", req.body);
     const { userId } = getAuth(req);
 
   // check if user already exists in mongodb
@@ -40,13 +41,14 @@ export const syncUser = asyncHandler(async(req, res)=>{
 
   // create new user from Clerk data
   const clerkUser = await clerkClient.users.getUser(userId)
+  console.log("Clerk user data:", clerkUser);
 
   const userData = {
     clerkId: userId,
     email: clerkUser.emailAddresses[0].emailAddress,
     firstName: clerkUser.firstName || "",
     lastName: clerkUser.lastName || "",
-    username: clerkUser.emailAddresses[0].emailAddress.split("@")[0],
+    userName: clerkUser.emailAddresses[0].emailAddress.split("@")[0], //changed here like userName
     profilePicture: clerkUser.imageUrl || "",
   };
 
