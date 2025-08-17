@@ -50,7 +50,7 @@ export const syncUser = asyncHandler(async(req, res)=>{
     email: clerkUser.emailAddresses[0].emailAddress,
     firstName: clerkUser.firstName ,
     lastName: clerkUser.lastName,
-    username: nanoid(12),
+    username: clerkUser.firstName.toLocaleLowerCase() || nanoid(8),
     profilePicture: clerkUser.imageUrl,
   };
 
