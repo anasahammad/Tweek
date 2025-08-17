@@ -6,7 +6,7 @@ const API_BASE_URL="https://tweek-pi.vercel.app/api"
 // const API_BASE_URL="http://localhost:5001/api"
 
 export const createApiClient = (getToken: () => Promise<string | null>): AxiosInstance => {
-  const api = axios.create({ baseURL: API_BASE_URL, headers: { "Content-Type": "application/json" } });
+  const api = axios.create({ baseURL: API_BASE_URL, headers: { "Content-Type": "application/json", "User-Agent": "Tweek-app/1.0 (Android; iOS; Web)" } });
 
   api.interceptors.request.use(async (config) => {
     const token = await getToken();

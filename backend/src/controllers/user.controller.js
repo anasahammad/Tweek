@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler"
 import User from "../models/user.model.js"
 import Notification from "../models/notification.model.js"
 import { clerkClient, getAuth } from "@clerk/express"
-
+import { nanoid } from "nanoid"
 
 export const getUserProfile = asyncHandler(async(req, res)=>{
     const {username} = req.params
@@ -31,6 +31,8 @@ export const updateProfile = asyncHandler(async(req, res)=>{
 
 export const syncUser = asyncHandler(async(req, res)=>{
   console.log("Syncing user...", req.body);
+  try {
+    console.log("Syncing user...", req.body);
     const { userId } = getAuth(req);
 
   // check if user already exists in mongodb
@@ -42,24 +44,26 @@ export const syncUser = asyncHandler(async(req, res)=>{
   // create new user from Clerk data
   const clerkUser = await clerkClient.users.getUser(userId)
   console.log("Clerk user data:", clerkUser);
-  const username = `clerkUser.emailAddresses[0].emailAddress.split("@")[0]${Math.floor(Math.random() * 10000)}`
+
   const userData = {
     clerkId: userId,
     email: clerkUser.emailAddresses[0].emailAddress,
-    firstName: clerkUser.firstName || "",
-    lastName: clerkUser.lastName || "",
-    username: username,
-    profilePicture: clerkUser.imageUrl || "",
+    firstName: clerkUser.firstName ,
+    lastName: clerkUser.lastName,
+    username: nanoid(12),
+    profilePicture: clerkUser.imageUrl,
   };
 
-  if (!userData.username) {
-  return res.status(400).json({ error: "username is required" });
-}
+ 
 
   const user = await User.create(userData);
 
   res.status(201).json({ user, message: "User created successfully" });
-})
+  } catch (error) {
+    console.error("Error in syncUser:", error);
+    res.status(500).json({ error: error.message || "Internal server error" });
+  }
+});
 
 export const getCurrentUser = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);

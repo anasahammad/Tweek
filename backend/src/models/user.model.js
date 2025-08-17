@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        index: { unique: true, sparse: true }
     },
     profilePicture: {
         type: String,
