@@ -9,12 +9,12 @@ import Notification from "../models/notification.model.js";
 export const getPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find()
     .sort({ createdAt: -1 })
-    .populate("user", "userName firstName lastName profilePicture")
+    .populate("user", "username firstName lastName profilePicture")
     .populate({
       path: "comments",
       populate: {
         path: "user",
-        select: "userName firstName lastName profilePicture",
+        select: "username firstName lastName profilePicture",
       },
     });
 
@@ -26,12 +26,12 @@ export const getPost = asyncHandler(async (req, res) => {
   const { postId } = req.params;
 
   const post = await Post.findById(postId)
-    .populate("user", "userName firstName lastName profilePicture")
+    .populate("user", "username firstName lastName profilePicture")
     .populate({
       path: "comments",
       populate: {
         path: "user",
-        select: "userName firstName lastName profilePicture",
+        select: "username firstName lastName profilePicture",
       },
     });
 
@@ -41,19 +41,19 @@ export const getPost = asyncHandler(async (req, res) => {
 });
 
 export const getUserPosts = asyncHandler(async (req, res) => {
-  const { userName } = req.params;
+  const { username } = req.params;
 
-  const user = await User.findOne({ userName });
+  const user = await User.findOne({ username });
   if (!user) return res.status(404).json({ error: "User not found" });
 
   const posts = await Post.find({ user: user._id })
     .sort({ createdAt: -1 })
-    .populate("user", "userName firstName lastName profilePicture")
+    .populate("user", "username firstName lastName profilePicture")
     .populate({
       path: "comments",
       populate: {
         path: "user",
-        select: "userName firstName lastName profilePicture",
+        select: "username firstName lastName profilePicture",
       },
     });
 

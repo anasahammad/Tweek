@@ -1,6 +1,6 @@
 export interface User {
   _id: string;
-  userName: string;
+  username: string;
   firstName: string;
   lastName: string;
   profilePicture?: string;
@@ -26,7 +26,7 @@ export interface Post {
 export interface Notification {
   _id: string;
   from: {
-    userName: string;
+    username: string;
     firstName: string;
     lastName: string;
     profilePicture?: string;

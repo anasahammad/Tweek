@@ -5,11 +5,11 @@ import React from 'react';
 import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import PostCard from './PostCard';
 
-const PostsList = ({userName}: {userName: string}) => {
+const PostsList = ({username}: {username: string}) => {
     const {currentUser} = useCurrentUser()
 
   const { posts, isLoading, error, refetch, toggleLike, deletePost, checkIsLiked } =
-    usePosts(userName);
+    usePosts(username);
 
 
      if (isLoading) {

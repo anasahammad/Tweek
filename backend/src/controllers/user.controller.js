@@ -5,8 +5,8 @@ import { clerkClient, getAuth } from "@clerk/express"
 
 
 export const getUserProfile = asyncHandler(async(req, res)=>{
-    const {userName} = req.params
-    const user = await User.findOne({userName})
+    const {username} = req.params
+    const user = await User.findOne({username})
     if(!user){
         return res.status(404).json({message:"User not found"})
     }
@@ -42,18 +42,18 @@ export const syncUser = asyncHandler(async(req, res)=>{
   // create new user from Clerk data
   const clerkUser = await clerkClient.users.getUser(userId)
   console.log("Clerk user data:", clerkUser);
-  const userName = clerkUser.emailAddresses[0].emailAddress.split("@")[0]
+  const username = `clerkUser.emailAddresses[0].emailAddress.split("@")[0]${Math.floor(Math.random() * 10000)}`
   const userData = {
     clerkId: userId,
     email: clerkUser.emailAddresses[0].emailAddress,
     firstName: clerkUser.firstName || "",
     lastName: clerkUser.lastName || "",
-    userName: userName,
+    username: username,
     profilePicture: clerkUser.imageUrl || "",
   };
 
-  if (!userData.userName) {
-  return res.status(400).json({ error: "userName is required" });
+  if (!userData.username) {
+  return res.status(400).json({ error: "username is required" });
 }
 
   const user = await User.create(userData);

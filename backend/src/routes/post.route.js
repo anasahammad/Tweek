@@ -9,7 +9,7 @@ import upload from "../middleware/upload.middleware.js"
 
 router.get("/", getPosts)
 router.get("/:postId", getPost)
-router.get("/user/:userName", getUserPosts)
+router.get("/user/:username", getUserPosts)
 
 // protected routes
 router.post("/", protectRoute, upload.single("image"), createPost)

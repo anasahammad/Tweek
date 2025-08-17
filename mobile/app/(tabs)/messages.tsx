@@ -100,7 +100,7 @@ const MessagesScreen = () => {
                   {conversation.user.verified && (
                     <Feather name="check-circle" size={16} color="#1DA1F2" className="ml-1" />
                   )}
-                  <Text className="text-gray-500 text-sm ml-1">@{conversation.user.userName}</Text>
+                  <Text className="text-gray-500 text-sm ml-1">@{conversation.user.username}</Text>
                 </View>
                 <Text className="text-gray-500 text-sm">{conversation.time}</Text>
               </View>
@@ -142,7 +142,7 @@ const MessagesScreen = () => {
                     <Feather name="check-circle" size={16} color="#1DA1F2" />
                   )}
                 </View>
-                <Text className="text-gray-500 text-sm">@{selectedConversation.user.userName}</Text>
+                <Text className="text-gray-500 text-sm">@{selectedConversation.user.username}</Text>
               </View>
             </View>
 
