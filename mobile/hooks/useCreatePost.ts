@@ -22,6 +22,8 @@ export const useCreatePost = ()=>{
         const fileType = uriParts[uriParts.length - 1].toLowerCase();
 
         const mimeTypeMap: Record<string, string> = {
+          jpg: "image/jpg",
+          jpeg: "image/jpeg",
           png: "image/png",
           gif: "image/gif",
           webp: "image/webp",
