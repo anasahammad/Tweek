@@ -10,7 +10,7 @@ export type ConversationType = {
   id: number;
   user: {
     name: string;
-    username: string;
+    userName: string;
     avatar: string;
     verified: boolean;
   };
@@ -25,7 +25,7 @@ export const CONVERSATIONS: ConversationType[] = [
     id: 1,
     user: {
       name: "James Doe",
-      username: "jamesdoe",
+      userName: "jamesdoe",
       avatar:
         "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       verified: false,
@@ -61,7 +61,7 @@ export const CONVERSATIONS: ConversationType[] = [
     id: 2,
     user: {
       name: "Coffee Lover",
-      username: "coffeelover",
+      userName: "coffeelover",
       avatar:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
       verified: false,
@@ -97,7 +97,7 @@ export const CONVERSATIONS: ConversationType[] = [
     id: 3,
     user: {
       name: "Alex Johnson",
-      username: "alexj",
+      userName: "alexj",
       avatar:
         "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
       verified: false,
@@ -133,7 +133,7 @@ export const CONVERSATIONS: ConversationType[] = [
     id: 4,
     user: {
       name: "Design Studio",
-      username: "designstudio",
+      userName: "designstudio",
       avatar:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
       verified: true,

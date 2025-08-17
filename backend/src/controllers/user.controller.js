@@ -5,8 +5,8 @@ import { clerkClient, getAuth } from "@clerk/express"
 
 
 export const getUserProfile = asyncHandler(async(req, res)=>{
-    const {username} = req.params
-    const user = await User.findOne({username})
+    const {userName} = req.params
+    const user = await User.findOne({userName})
     if(!user){
         return res.status(404).json({message:"User not found"})
     }
@@ -48,7 +48,7 @@ export const syncUser = asyncHandler(async(req, res)=>{
     email: clerkUser.emailAddresses[0].emailAddress,
     firstName: clerkUser.firstName || "",
     lastName: clerkUser.lastName || "",
-    username: clerkUser.emailAddresses[0].emailAddress.split("@")[0],
+    userName: clerkUser.emailAddresses[0].emailAddress.split("@")[0],
     profilePicture: clerkUser.imageUrl || "",
   };
 
