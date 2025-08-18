@@ -1,8 +1,10 @@
 
+import EditProfileModal from '@/components/EditProfileModal';
 import PostsList from '@/components/PostsList';
 import SignOutButton from '@/components/SignOutButton';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { usePosts } from '@/hooks/usePosts';
+import { useProfile } from '@/hooks/useProfile';
 import { Feather } from '@expo/vector-icons';
 import { format } from 'date-fns';
 import React from 'react';
@@ -20,6 +22,17 @@ const ProfileScreen = () => {
     isLoading: isRefetching,
   } = usePosts(currentUser?.username);
 
+ const {
+    isEditModalVisible,
+    openEditModal,
+    closeEditModal,
+    formData,
+    saveProfile,
+    updateFormField,
+    isUpdating,
+    refetch: refetchProfile,
+  } = useProfile();
+
       if (isLoading) {
     return (
       <View className="flex-1 bg-white items-center justify-center">
@@ -28,7 +41,7 @@ const ProfileScreen = () => {
     );
   }
     return (
-        <SafeAreaView className='flex-1 bg-white'>
+        <SafeAreaView className='flex-1 bg-white' edges={["top"]}>
            {/* Header */}
       <View className="flex-row items-center justify-between px-4 py-3 border-b border-gray-100">
         <View>
@@ -49,7 +62,7 @@ const ProfileScreen = () => {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={() => {
-              // refetchProfile();
+              refetchProfile();
               refetchPosts();
             }}
             tintColor="#1DA1F2"
@@ -73,7 +86,7 @@ const ProfileScreen = () => {
             />
             <TouchableOpacity
               className="border border-gray-300 px-6 py-2 rounded-full"
-            //   onPress={openEditModal}
+              onPress={openEditModal}
             >
               <Text className="font-semibold text-gray-900">Edit profile</Text>
             </TouchableOpacity>
@@ -122,6 +135,15 @@ const ProfileScreen = () => {
 
         <PostsList username={currentUser?.username} />
       </ScrollView>
+
+         <EditProfileModal
+        isVisible={isEditModalVisible}
+        onClose={closeEditModal}
+        formData={formData}
+        saveProfile={saveProfile}
+        updateFormField={updateFormField}
+        isUpdating={isUpdating}
+      />
         </SafeAreaView>
     );
 };

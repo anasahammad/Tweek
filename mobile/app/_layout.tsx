@@ -19,3 +19,11 @@ export default function RootLayout() {
     </ClerkProvider>
   );
 }
+
+
+// Todo: 
+// 1: Follow/Unfollow
+// 2: Delete Comment
+// 3: Update Profile Image and Banner
+// 4: Implement Search Screen
+// 5: Implement Messaging (use Firebase/Supabase or Convex)
